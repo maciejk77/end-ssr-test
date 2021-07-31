@@ -1,12 +1,16 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
+import data from '../../data';
+
+const { navCategories } = data;
 
 const Home = () => {
-  const [count, setCount] = useState(0);
+  console.log(navCategories);
 
   return (
     <Fragment>
-      <div>Count: {count}</div>
-      <button onClick={() => setCount(count + 1)}>ADD</button>
+      {navCategories.map(({ id, category_path }) => (
+        <div key={id}>{category_path}</div>
+      ))}
     </Fragment>
   );
 };
