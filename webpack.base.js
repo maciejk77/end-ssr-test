@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   // use babel on every running file
   module: {
@@ -14,6 +16,17 @@ module.exports = {
           ],
         },
       },
+      // {
+      //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: '[name].[hash:6].[ext]',
+      //     outputPath: 'assets',
+      //     publicPath: 'assets',
+      //     emitFile: true,
+      //     esModule: false,
+      //   },
+      // },
     ],
   },
 };

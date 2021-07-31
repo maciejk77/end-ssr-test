@@ -12,7 +12,7 @@ This project serves SSR React component
 ### Requirements
 
 - server-side render new navigation component from an Express server
-- using the data the same way as if it was an api request that had to be made on the server first
+- use the data the same way as if it was an api request that had to be made on the server first
 - hover functionality with a hover
 - split the data into columns, consider the include_in_menu, include_in_menu_column2, include_in_menu_column3 attribute
 

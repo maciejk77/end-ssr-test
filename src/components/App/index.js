@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import Home from '../Home';
+import Nav from '../Nav';
 
 const App = () => {
   return (
     <Fragment>
-      <Home />
+      <Nav />
     </Fragment>
   );
 };
