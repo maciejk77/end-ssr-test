@@ -15,7 +15,8 @@ const config = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
   },
-
+  // not sure if it is doing what it is supposed to
+  // a reduction in bundle size not noticed
   externals: [webpackNodeExternals()],
 };
 
