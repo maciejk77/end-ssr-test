@@ -1,42 +1,8 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import data from '../../data';
-
-const { navCategories } = data;
+import React, { Fragment } from 'react';
+import useData from '../../hooks/useData';
 
 const Nav = () => {
-  const [categories, setCategories] = useState([]);
-  const [activeTab, setActiveTab] = useState('');
-  const [columnOneData, setColumnOneData] = useState([]);
-  const [columnTwoData, setColumnTwoData] = useState([]);
-
-  // console.log(navCategories);
-
-  useEffect(() => {
-    const categories = navCategories.map((ctg) => ctg.name);
-    setCategories(categories);
-  }, []);
-
-  useEffect(() => {
-    const subCategoriesData =
-      activeTab &&
-      navCategories
-        .filter((category) => category.name === activeTab)
-        .map((category) => category.children_data)[0]
-        .filter((data) => data.is_column_header !== true); // filter out column headers
-
-    const columnOneData =
-      subCategoriesData &&
-      subCategoriesData.filter(
-        (data) => data.include_in_menu_column2 === undefined
-      );
-
-    const columnTwoData =
-      subCategoriesData &&
-      subCategoriesData.filter((d) => d.include_in_menu_column2 !== undefined);
-
-    setColumnOneData(columnOneData);
-    setColumnTwoData(columnTwoData);
-  }, [activeTab]);
+  const { setActiveTab, columnsData, categories } = useData();
 
   const renderColumn = (data) =>
     data &&
@@ -45,8 +11,6 @@ const Nav = () => {
         {name}
       </div>
     ));
-
-  const columnsData = [{ column: columnOneData }, { column: columnTwoData }];
 
   const categoriesNav = categories.map((category) => (
     <div
