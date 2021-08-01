@@ -30521,39 +30521,82 @@ var navCategories = _data2.default.navCategories;
 var Nav = function Nav() {
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      activeTab = _useState2[0],
-      setActiveTab = _useState2[1];
+      categories = _useState2[0],
+      setCategories = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      activeTab = _useState4[0],
+      setActiveTab = _useState4[1];
+
+  var _useState5 = (0, _react.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      columnOneData = _useState6[0],
+      setColumnOneData = _useState6[1];
+
+  var _useState7 = (0, _react.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      columnTwoData = _useState8[0],
+      setColumnTwoData = _useState8[1];
 
   // console.log(navCategories);
 
-  var categoriesNav = navCategories.map(function (_ref) {
-    var id = _ref.id,
-        category_path = _ref.category_path;
+  (0, _react.useEffect)(function () {
+    var categories = navCategories.map(function (ctg) {
+      return ctg.name;
+    });
+    setCategories(categories);
+  }, []);
+
+  (0, _react.useEffect)(function () {
+    var subCategoriesData = activeTab && navCategories.filter(function (category) {
+      return category.name === activeTab;
+    }).map(function (category) {
+      return category.children_data;
+    })[0].filter(function (data) {
+      return data.is_column_header !== true;
+    }); // filter out column headers
+
+    var columnOneData = subCategoriesData && subCategoriesData.filter(function (data) {
+      return data.include_in_menu_column2 === undefined;
+    });
+
+    var columnTwoData = subCategoriesData && subCategoriesData.filter(function (d) {
+      return d.include_in_menu_column2 !== undefined;
+    });
+
+    setColumnOneData(columnOneData);
+    setColumnTwoData(columnTwoData);
+  }, [activeTab]);
+
+  var renderColumn = function renderColumn(data) {
+    return data && data.map(function (_ref) {
+      var id = _ref.id,
+          name = _ref.name;
+      return _react2.default.createElement(
+        'div',
+        { style: styles.columnItem, key: id },
+        name
+      );
+    });
+  };
+
+  var columnsData = [{ column: columnOneData }, { column: columnTwoData }];
+
+  var categoriesNav = categories.map(function (category) {
     return _react2.default.createElement(
       'div',
       {
-        key: id,
+        key: category,
         style: styles.navItem,
         onMouseOver: function onMouseOver() {
-          return setActiveTab(category_path);
+          return setActiveTab(category);
         },
         onMouseLeave: function onMouseLeave() {
           return setActiveTab(null);
         }
       },
-      category_path.toUpperCase()
-    );
-  });
-
-  var categoryList = navCategories.filter(function (nC) {
-    return nC.name === activeTab;
-  });
-
-  var subCategory = categoryList[0] && categoryList[0]['children_data'].map(function (data) {
-    return _react2.default.createElement(
-      'div',
-      { key: data.id },
-      data.name
+      category.toUpperCase()
     );
   });
 
@@ -30567,8 +30610,14 @@ var Nav = function Nav() {
     ),
     _react2.default.createElement(
       'div',
-      null,
-      subCategory
+      { style: styles.categories },
+      columnsData.map(function (cD, idx) {
+        return _react2.default.createElement(
+          'div',
+          { key: idx, style: styles.column },
+          renderColumn(cD.column)
+        );
+      })
     )
   );
 };
@@ -30586,6 +30635,20 @@ var styles = {
     // border: '1px dotted red',
     padding: 5,
     marginRight: 10
+  },
+  categories: {
+    display: 'flex'
+  },
+  column: {
+    // border: '1px dotted red',
+    marginRight: 10,
+    padding: 10
+  },
+  columnItem: {
+    // border: '1px dotted green',
+    marginBottom: 10,
+    fontFamily: 'Arial',
+    fontSize: 13
   }
 };
 
