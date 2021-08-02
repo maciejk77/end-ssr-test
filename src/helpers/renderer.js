@@ -8,7 +8,7 @@ export default () => {
   return `
     <html>
       <head></head>
-      <body>
+      <body style="margin: 0">
         <div id="root">${content}</div>
         <script src="bundle.js"></script>
       </body>

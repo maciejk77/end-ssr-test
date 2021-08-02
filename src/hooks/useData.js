@@ -8,6 +8,8 @@ const useData = () => {
   const [columnsData, setColumnsData] = useState([]);
   const [LAUNCHES, FEATURES] = ['Launches', 'Features'];
 
+  console.log(navCategories);
+
   useEffect(() => {
     const categories = navCategories
       .map((ctg) => ctg.name)
