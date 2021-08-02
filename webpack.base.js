@@ -16,21 +16,6 @@ module.exports = {
           ],
         },
       },
-      // {
-      //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
-      //   loader: 'file-loader',
-      //   options: {
-      //     name: '[name].[hash:6].[ext]',
-      //     outputPath: 'assets',
-      //     publicPath: 'assets',
-      //     emitFile: true,
-      //     esModule: false,
-      //   },
-      // },
-      {
-        test: /\.(png|jpg|)$/,
-        loader: 'url-loader?limit=200000',
-      },
     ],
   },
 };

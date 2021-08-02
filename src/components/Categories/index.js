@@ -1,40 +1,41 @@
-// import React, { useEffect, useState } from 'react';
-// import useData from '../../hooks/useData';
-// // import 'regenerator-runtime/runtime';
+// TODO - Tried to split Nav and import e.g. Categories component from here
+// TODO - Some problem ocurred with not showing Columns
+// TODO - Look into custom hook useData vs Context API to resolve this?
 
-// const Categories = () => {
-//   const { categories, setActiveTab } = useData();
+import useData from '../../hooks/useData';
 
-//   return (
-//     <div style={styles.nav}>
-//       {categories.map((category) => (
-//         <div
-//           key={category}
-//           style={styles.navItem}
-//           onMouseOver={() => setActiveTab(category)}
-//           onMouseLeave={() => setActiveTab(null)}
-//         >
-//           {category.toUpperCase()}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
+const Categories = () => {
+  const { categories, setActiveTab } = useData();
 
-// const styles = {
-//   nav: {
-//     // border: '1px dotted gray',
-//     display: 'flex',
-//     padding: 10,
-//     fontFamily: 'Arial',
-//     fontSize: 15,
-//     justifyContent: 'center',
-//   },
-//   navItem: {
-//     // border: '1px dotted red',
-//     padding: 5,
-//     marginRight: 10,
-//   },
-// };
+  return (
+    <div style={styles.categories}>
+      {categories.map((category) => (
+        <div
+          key={category}
+          style={styles.category}
+          onMouseOver={() => setActiveTab(category)}
+        >
+          {category}
+        </div>
+      ))}
+    </div>
+  );
+};
 
-// export default Categories;
+const styles = {
+  nav: {
+    // border: '1px dotted gray',
+    display: 'flex',
+    padding: 10,
+    fontFamily: 'Arial',
+    fontSize: 15,
+    justifyContent: 'center',
+  },
+  navItem: {
+    // border: '1px dotted red',
+    padding: 5,
+    marginRight: 10,
+  },
+};
+
+export default Categories;

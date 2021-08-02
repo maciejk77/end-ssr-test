@@ -5,7 +5,7 @@ import Logo from '../Logo';
 // import Categories from '../Categories';
 
 const Nav = () => {
-  const { setActiveTab, columnsData, categories } = useData();
+  const { setActiveTab, columnsData, categories, images } = useData();
 
   const renderColumn = (data) =>
     data &&
@@ -15,7 +15,7 @@ const Nav = () => {
       </div>
     ));
 
-  // this should be imported into as a component
+  // this should be imported here as a Categories component
   const Categories = () => {
     return (
       <div style={styles.categories}>
@@ -32,7 +32,7 @@ const Nav = () => {
     );
   };
 
-  // this should be imported into as a component
+  // this should be imported here as a Columns component
   const Columns = () => (
     <div style={styles.columns}>
       {columnsData.map((cD, idx) => (
@@ -43,51 +43,85 @@ const Nav = () => {
     </div>
   );
 
+  // TODO fix images not showing for activeTab falsy - initial load, hover outside of nav
+  // TODO iterate over images array with 2 or 4 items - see comments in useData
+  // this should be imported here as a Images component
+  const Images = () => (
+    <div style={styles.images}>
+      {images &&
+        images.map((img, idx) => (
+          <div key={idx} style={styles.imageItem}>
+            <img src={img} alt="" width={200} height={180} />
+          </div>
+        ))}
+    </div>
+  );
+
+  // TODO import image src here not a Logo component
   return (
     <Fragment>
       <Header>FREE UK DELIVER ON ALL ORDERS OVER £150 | FREE UK RETURNS</Header>
       <Logo>END.</Logo>
       <div onMouseLeave={() => setActiveTab(null)}>
         <Categories />
-        <Columns />
+        <div style={{ display: 'flex' }}>
+          <Columns />
+          <Images />
+        </div>
       </div>
     </Fragment>
   );
 };
 
+// TODO split styles into separate components e.g. Categories, Columns, Images
+// TODO CSS in JS, i.e. styled-components for themes, variables, props
 const styles = {
   categories: {
-    borderTop: '1px solid rgb(242, 242, 242)',
     borderBottom: '1px solid rgb(242, 242, 242)',
+    borderTop: '1px solid rgb(242, 242, 242)',
     display: 'flex',
-    padding: '8px 16px 6px',
     fontFamily:
       'ProximaNova-Semibold, "Helvetica Neue", Verdana, Arial, sans-serif',
-    textTransform: 'uppercase',
     fontSize: '0.8rem',
     justifyContent: 'center',
+    padding: '8px 16px 6px',
+    textTransform: 'uppercase',
   },
   category: {
     // border: '1px dotted red',
-    padding: 5,
     marginRight: 15,
+    padding: 5,
   },
   columns: {
+    // border: '1px dotted green',
     display: 'flex',
-    paddingTop: 20,
     paddingLeft: 50,
+    paddingTop: 20,
   },
   column: {
-    // border: '1px dotted red',
+    // border: '1px dotted blue',
     marginRight: 30,
     padding: 10,
   },
   columnItem: {
-    // border: '1px dotted green',
+    // border: '1px dotted black',
     marginBottom: 10,
     fontFamily:
       'ProximaNova-Semibold, "Helvetica Neue", Verdana, Arial, sans-serif',
     fontSize: 14,
+  },
+  images: {
+    // border: '1px dotted orange',
+    display: 'flex',
+    flexWrap: 'wrap',
+    height: 440,
+    justifyContent: 'center',
+    paddingBottom: 2,
+    paddingRight: 2,
+    width: 440,
+  },
+  imageItem: {
+    margin: 10,
   },
 };
 
