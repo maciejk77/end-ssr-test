@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import useData from '../../hooks/useData';
+// import Categories from '../Categories';
 
 const Nav = () => {
   const { setActiveTab, columnsData, categories } = useData();
@@ -12,27 +13,39 @@ const Nav = () => {
       </div>
     ));
 
-  const categoriesNav = categories.map((category) => (
-    <div
-      key={category}
-      style={styles.navItem}
-      onMouseOver={() => setActiveTab(category)}
-      onMouseLeave={() => setActiveTab(null)}
-    >
-      {category.toUpperCase()}
-    </div>
-  ));
-
-  return (
-    <Fragment>
-      <div style={styles.nav}>{categoriesNav}</div>
-      <div style={styles.categories}>
-        {columnsData.map((cD, idx) => (
-          <div key={idx} style={styles.column}>
-            {renderColumn(cD.column)}
+  // this should be imported into as a component
+  const Categories = () => {
+    return (
+      <div style={styles.nav}>
+        {categories.map((category) => (
+          <div
+            key={category}
+            style={styles.navItem}
+            onMouseOver={() => setActiveTab(category)}
+            onMouseLeave={() => setActiveTab(null)}
+          >
+            {category.toUpperCase()}
           </div>
         ))}
       </div>
+    );
+  };
+
+  // this should be imported into as a component
+  const Columns = () => (
+    <div style={styles.categories}>
+      {columnsData.map((cD, idx) => (
+        <div key={idx} style={styles.column}>
+          {renderColumn(cD.column)}
+        </div>
+      ))}
+    </div>
+  );
+
+  return (
+    <Fragment>
+      <Categories />
+      <Columns />
     </Fragment>
   );
 };
@@ -43,7 +56,7 @@ const styles = {
     display: 'flex',
     padding: 10,
     fontFamily: 'Arial',
-    fontSize: 13,
+    fontSize: 15,
     justifyContent: 'center',
   },
   navItem: {
@@ -63,7 +76,7 @@ const styles = {
     // border: '1px dotted green',
     marginBottom: 10,
     fontFamily: 'Arial',
-    fontSize: 13,
+    fontSize: 14,
   },
 };
 

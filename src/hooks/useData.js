@@ -5,11 +5,14 @@ const useData = () => {
   const { navCategories } = data;
   const [categories, setCategories] = useState([]);
   const [activeTab, setActiveTab] = useState('');
-  const [columnOneData, setColumnOneData] = useState([]);
-  const [columnTwoData, setColumnTwoData] = useState([]);
+  const [columnsData, setColumnsData] = useState([]);
+  const [LAUNCHES, FEATURES] = ['Launches', 'Features'];
 
   useEffect(() => {
-    const categories = navCategories.map((ctg) => ctg.name);
+    const categories = navCategories
+      .map((ctg) => ctg.name)
+      .filter((ctg) => ctg !== LAUNCHES) // exclude as per brief
+      .filter((ctg) => ctg !== FEATURES); // no data on children_data
     setCategories(categories);
   }, []);
 
@@ -23,19 +26,26 @@ const useData = () => {
 
     const columnOneData =
       subCategoriesData &&
-      subCategoriesData.filter(
-        (data) => data.include_in_menu_column2 === undefined
-      );
+      subCategoriesData
+        .filter((data) => !data.include_in_menu_column2)
+        .filter((data) => !data.include_in_menu_column3);
 
     const columnTwoData =
       subCategoriesData &&
-      subCategoriesData.filter((d) => d.include_in_menu_column2 !== undefined);
+      subCategoriesData.filter((data) => !!data.include_in_menu_column2);
 
-    setColumnOneData(columnOneData);
-    setColumnTwoData(columnTwoData);
+    const columnThreeData =
+      subCategoriesData &&
+      subCategoriesData.filter((data) => !!data.include_in_menu_column3);
+
+    const columnsDataCombined = [
+      { column: columnOneData },
+      { column: columnTwoData },
+      { column: columnThreeData },
+    ];
+
+    setColumnsData(columnsDataCombined);
   }, [activeTab]);
-
-  const columnsData = [{ column: columnOneData }, { column: columnTwoData }];
 
   return { setActiveTab, columnsData, categories };
 };

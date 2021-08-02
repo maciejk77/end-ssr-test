@@ -27,6 +27,10 @@ module.exports = {
       //     esModule: false,
       //   },
       // },
+      {
+        test: /\.(png|jpg|)$/,
+        loader: 'url-loader?limit=200000',
+      },
     ],
   },
 };
