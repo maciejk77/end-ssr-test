@@ -6,7 +6,7 @@ This project serves SSR React component
 
 - `git clone` the project
 - `yarn` to install dependencies
-- `yarn dev` to run
+- `yarn dev` to run (if any problems run, stop and run again on first attempt - bundle needs to be build)
 - visit `localhost:3000` to preview
 
 ### Requirements
