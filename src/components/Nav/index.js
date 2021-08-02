@@ -4,6 +4,10 @@ import Header from '../Header';
 import Logo from '../Logo';
 // import Categories from '../Categories';
 
+// TODO align columns 1-3, images group
+// TODO spread evenly - flex, space - evenly etc.
+// TODO make sure they stay in fixed position, no 'jump' between hovers
+
 const Nav = () => {
   const { setActiveTab, columnsData, categories, images } = useData();
 

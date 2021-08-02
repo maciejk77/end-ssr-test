@@ -13,6 +13,7 @@ const useData = () => {
   // console.log(navCategories);
   // debugger;
 
+  // create a list of categories on initial load
   useEffect(() => {
     const categories = navCategories
       .map((ctg) => ctg.name)
@@ -21,13 +22,15 @@ const useData = () => {
     setCategories(categories);
   }, []);
 
+  // compute columns data on each hover
+  // computes also on outside of menu hover? - fix needed
   useEffect(() => {
     const subCategoriesData =
       activeTab &&
       navCategories
         .filter((category) => category.name === activeTab)
         .map((category) => category.children_data)[0]
-        .filter((data) => data.is_column_header !== true); // filter out column headers
+        .filter((data) => data.is_column_header !== true); // filtered out column headers
 
     // this could be optimised, e.g. reduce?, GraphQL queries
     // multiple filtering on each hover over/out
@@ -37,6 +40,7 @@ const useData = () => {
         .filter((data) => !data.include_in_menu_column2)
         .filter((data) => !data.include_in_menu_column3);
 
+    // below to DRY?
     const columnTwoData =
       subCategoriesData &&
       subCategoriesData.filter((data) => !!data.include_in_menu_column2);
