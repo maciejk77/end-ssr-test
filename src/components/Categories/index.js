@@ -1,11 +1,8 @@
-// TODO - Tried to split Nav and import e.g. Categories component from here
-// TODO - Some problem ocurred with not showing Columns
-// TODO - Look into custom hook useData vs Context API to resolve this?
-
-import useData from '../../hooks/useData';
+import React, { useContext } from 'react';
+import { DataContext } from '../../contexts/dataContext';
 
 const Categories = () => {
-  const { categories, setActiveTab } = useData();
+  const { setActiveTab, categories } = useContext(DataContext);
 
   return (
     <div style={styles.categories}>
@@ -23,18 +20,20 @@ const Categories = () => {
 };
 
 const styles = {
-  nav: {
-    // border: '1px dotted gray',
+  categories: {
+    borderBottom: '1px solid rgb(242, 242, 242)',
+    borderTop: '1px solid rgb(242, 242, 242)',
     display: 'flex',
-    padding: 10,
-    fontFamily: 'Arial',
-    fontSize: 15,
+    fontFamily:
+      'ProximaNova-Semibold, "Helvetica Neue", Verdana, Arial, sans-serif',
+    fontSize: '0.8rem',
     justifyContent: 'center',
+    padding: '8px 16px 6px',
+    textTransform: 'uppercase',
   },
-  navItem: {
-    // border: '1px dotted red',
+  category: {
+    marginRight: 15,
     padding: 5,
-    marginRight: 10,
   },
 };
 

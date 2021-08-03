@@ -1,17 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import data from '../data';
+import { DataContext } from '../contexts/dataContext';
 
 const useData = () => {
+  const {
+    activeTab,
+    columnsData,
+    setColumnsData,
+    images,
+    setImages,
+    categories,
+    setCategories,
+  } = useContext(DataContext);
+
   const { navCategories } = data;
-  const [categories, setCategories] = useState([]);
-  const [activeTab, setActiveTab] = useState('');
-  const [columnsData, setColumnsData] = useState([]);
-  const [images, setImages] = useState([]);
-
   const [LAUNCHES, FEATURES] = ['Launches', 'Features'];
-
-  // console.log(navCategories);
-  // debugger;
 
   // create a list of categories on initial load
   useEffect(() => {
@@ -22,7 +25,6 @@ const useData = () => {
     setCategories(categories);
   }, []);
 
-  // compute columns data on each hover
   // computes also on outside of menu hover? - fix needed
   useEffect(() => {
     const subCategoriesData =
@@ -32,8 +34,7 @@ const useData = () => {
         .map((category) => category.children_data)[0]
         .filter((data) => data.is_column_header !== true); // filtered out column headers
 
-    // this could be optimised, e.g. reduce?, GraphQL queries
-    // multiple filtering on each hover over/out
+    // multiple filtering on each hover over/out?
     const columnOneData =
       subCategoriesData &&
       subCategoriesData
@@ -79,7 +80,7 @@ const useData = () => {
     setImages(fourItemsArray);
   }, [activeTab]);
 
-  return { setActiveTab, columnsData, categories, images };
+  return { columnsData, categories, images };
 };
 
 export default useData;
