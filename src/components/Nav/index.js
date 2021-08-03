@@ -25,6 +25,7 @@ const Nav = () => {
 const styles = {
   flexRow: {
     display: 'flex',
+    justifyContent: 'center',
   },
 };
 

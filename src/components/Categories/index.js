@@ -3,10 +3,10 @@ import { DataContext } from '../../contexts/dataContext';
 import data from '../../data';
 
 const Categories = () => {
+  const { navCategories } = data;
   const { setActiveTab } = useContext(DataContext);
   const [categories, setCategories] = useState([]);
   const [LAUNCHES, FEATURES] = ['Launches', 'Features'];
-  const { navCategories } = data;
 
   useEffect(() => {
     const categories = navCategories
