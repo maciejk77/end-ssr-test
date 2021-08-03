@@ -1,10 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../contexts/dataContext';
-import useData from '../../hooks/useData';
+import data from '../../data';
 
 const Images = () => {
   const { activeTab } = useContext(DataContext);
-  const { images } = useData();
+  const [images, setImages] = useState([]);
+  const { navCategories } = data;
+
+  useEffect(() => {
+    const images =
+      activeTab &&
+      navCategories
+        .filter((category) => category.name === activeTab)
+        .filter((data) => data.dropdown_image_url)
+        .map((img) => img.dropdown_image_url);
+
+    const fourItemsArray = Array(4).fill(images); // quick hack
+
+    // setImages(images);
+    setImages(fourItemsArray);
+  }, [activeTab]);
 
   return (
     activeTab && (

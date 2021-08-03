@@ -1,8 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../contexts/dataContext';
+import data from '../../data';
 
 const Columns = () => {
-  const { columnsData } = useContext(DataContext);
+  const { activeTab, columnsData, setColumnsData } = useContext(DataContext);
+  // const [columnsData, setColumnsData] = useState([]);
+  const { navCategories } = data;
+
+  useEffect(() => {
+    const subCategoriesData =
+      activeTab &&
+      navCategories
+        .filter((category) => category.name === activeTab)
+        .map((category) => category.children_data)[0]
+        .filter((data) => data.is_column_header !== true); // filtered out column headers
+
+    // multiple filtering on each hover over/out?
+    const columnOneData =
+      subCategoriesData &&
+      subCategoriesData
+        .filter((data) => !data.include_in_menu_column2)
+        .filter((data) => !data.include_in_menu_column3);
+
+    // below to DRY?
+    const columnTwoData =
+      subCategoriesData &&
+      subCategoriesData.filter((data) => !!data.include_in_menu_column2);
+
+    const columnThreeData =
+      subCategoriesData &&
+      subCategoriesData.filter((data) => !!data.include_in_menu_column3);
+
+    const columnsDataCombined = [
+      { column: columnOneData },
+      { column: columnTwoData },
+      { column: columnThreeData },
+    ];
+
+    setColumnsData(columnsDataCombined);
+  }, [activeTab]);
 
   const renderColumn = (data) =>
     data &&

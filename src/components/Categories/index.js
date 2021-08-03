@@ -1,8 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../contexts/dataContext';
+import data from '../../data';
 
 const Categories = () => {
-  const { setActiveTab, categories } = useContext(DataContext);
+  const { setActiveTab } = useContext(DataContext);
+  const [categories, setCategories] = useState([]);
+  const [LAUNCHES, FEATURES] = ['Launches', 'Features'];
+  const { navCategories } = data;
+
+  useEffect(() => {
+    const categories = navCategories
+      .map((ctg) => ctg.name)
+      .filter((ctg) => ctg !== LAUNCHES) // exclude as per brief
+      .filter((ctg) => ctg !== FEATURES); // no data on children_data
+    setCategories(categories);
+  }, []);
 
   return (
     <div style={styles.categories}>
