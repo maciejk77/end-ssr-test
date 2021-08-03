@@ -8,23 +8,26 @@ const Images = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    const images =
-      activeTab &&
-      navCategories
-        .filter((category) => category.name === activeTab)
-        .filter((data) => data.dropdown_image_url)
-        .map((img) => img.dropdown_image_url);
+    const image =
+      (activeTab &&
+        navCategories
+          .filter((category) => category.name === activeTab)
+          .filter((data) => data.dropdown_image_url)
+          .map((img) => img.dropdown_image_url)) ||
+      '';
 
-    const fourItemsArray = Array(4).fill(images); // quick hack
+    const fourItemsArray = Array(4).fill(...image); // quick hack
 
     // setImages(images);
     setImages(fourItemsArray);
   }, [activeTab]);
 
+  const hasImages = images.some((img) => img !== undefined);
+
   return (
     activeTab && (
       <div style={styles.images}>
-        {images &&
+        {hasImages &&
           images.map((img, idx) => (
             <div key={idx} style={styles.imageItem}>
               <img src={img} alt="" width={200} height={180} />
