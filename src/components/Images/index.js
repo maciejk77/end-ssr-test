@@ -3,9 +3,9 @@ import { DataContext } from '../../contexts/dataContext';
 import data from '../../data';
 
 const Images = () => {
+  const { navCategories } = data;
   const { activeTab } = useContext(DataContext);
   const [images, setImages] = useState([]);
-  const { navCategories } = data;
 
   useEffect(() => {
     const images =

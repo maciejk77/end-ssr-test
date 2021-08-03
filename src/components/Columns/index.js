@@ -3,8 +3,8 @@ import { DataContext } from '../../contexts/dataContext';
 import data from '../../data';
 
 const Columns = () => {
-  const { activeTab, columnsData, setColumnsData } = useContext(DataContext);
-  // const [columnsData, setColumnsData] = useState([]);
+  const { activeTab } = useContext(DataContext);
+  const [columnsData, setColumnsData] = useState([]);
   const { navCategories } = data;
 
   useEffect(() => {
