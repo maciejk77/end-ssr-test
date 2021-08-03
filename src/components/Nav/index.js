@@ -1,7 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import { DataContext } from '../../contexts/dataContext';
-import Header from '../Header';
-import Logo from '../Logo';
 import Categories from '../Categories';
 import Columns from '../Columns';
 import Images from '../Images';
@@ -12,13 +10,9 @@ const Nav = () => {
   return (
     <Fragment>
       <DataContext.Provider value={{ activeTab, setActiveTab }}>
-        <Header>
-          FREE UK DELIVER ON ALL ORDERS OVER £150 | FREE UK RETURNS
-        </Header>
-        <Logo>END.</Logo>
         <div onMouseLeave={() => setActiveTab(null)}>
           <Categories />
-          <div style={styles.flex}>
+          <div style={styles.flexRow}>
             <Columns />
             <Images />
           </div>
@@ -29,7 +23,7 @@ const Nav = () => {
 };
 
 const styles = {
-  flex: {
+  flexRow: {
     display: 'flex',
   },
 };
