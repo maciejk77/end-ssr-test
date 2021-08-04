@@ -7,27 +7,28 @@ const Images = () => {
   const { activeTab } = useContext(DataContext);
   const [images, setImages] = useState([]);
 
+  const fourImagesArray = () => {
+    const data =
+      activeTab &&
+      navCategories.filter((category) => category.name === activeTab);
+
+    if (data) {
+      const dataObjectValues = Object.values(data[0]);
+      return dataObjectValues
+        .filter((value) => value.toString().match(/^https:/))
+        .splice(0, 4);
+    }
+  };
+
   useEffect(() => {
-    const image =
-      (activeTab &&
-        navCategories
-          .filter((category) => category.name === activeTab)
-          .filter((data) => data.dropdown_image_url)
-          .map((img) => img.dropdown_image_url)) ||
-      '';
-
-    const fourItemsArray = Array(4).fill(...image); // quick hack
-
-    // setImages(images);
-    setImages(fourItemsArray);
+    const images = fourImagesArray();
+    setImages(images);
   }, [activeTab]);
-
-  const hasImages = images.some((img) => img !== undefined);
 
   return (
     activeTab && (
       <div style={styles.images}>
-        {hasImages &&
+        {images &&
           images.map((img, idx) => (
             <div key={idx} style={styles.imageItem}>
               <img src={img} alt="" width={200} height={180} />
