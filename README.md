@@ -21,3 +21,7 @@ This project serves SSR React component
 - the dropdowns functioning (hidden, then revealed on hover)
 - any loading of manipulation of data as required
 - the thought process behind structure of the code (especially the breakdown of components) and the reasons behind the choices
+
+## Screenshots
+
+<img src="src/assets/screenshot.png" width="400">

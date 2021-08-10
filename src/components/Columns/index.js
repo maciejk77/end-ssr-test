@@ -37,6 +37,12 @@ const Columns = () => {
       { column: columnThreeData },
     ];
 
+    // to refactor, can be simplified, quick hack
+    // const columnsWithData = columnsDataCombined
+    //   .map((data) => !!data.column.length)
+    //   .filter((el) => el === true);
+    // console.log(columnsWithData.length || 0);
+
     setColumnsData(columnsDataCombined);
   }, [activeTab]);
 

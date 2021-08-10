@@ -14,9 +14,12 @@ const Images = () => {
 
     if (data) {
       const dataObjectValues = Object.values(data[0]);
-      return dataObjectValues
-        .filter((value) => value.toString().match(/^https:/))
-        .splice(0, 4);
+      const imageLinks = dataObjectValues.filter((value) =>
+        value.toString().match(/^https:/)
+      );
+      // const howManyToSplice = imageLinks.length < 4 ? 2 : 4;
+      // return imageLinks.splice(0, howManyToSplice);
+      return imageLinks.splice(0, 4);
     }
   };
 
