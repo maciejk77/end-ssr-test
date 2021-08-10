@@ -24,4 +24,4 @@ This project serves SSR React component
 
 ## Screenshots
 
-<img src="https://github.com/maciejk77/end-ssr-test/blob/master/src/assets/screeenshot.png?raw=true" width="600" height="400" />
+<img src="https://github.com/maciejk77/end-ssr-test/blob/master/src/assets/screeenshot.png?raw=true" width="800" height="400" />
